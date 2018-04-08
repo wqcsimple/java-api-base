@@ -1,5 +1,6 @@
 package com.whis.app.controller;
 
+import com.whis.app.service.HttpTestService;
 import com.whis.app.service.TestService;
 import com.whis.base.common.DataResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,18 @@ public class TestController {
 
 
     private final TestService testService;
+    private final HttpTestService httpTestService;
 
     @Autowired
-    public TestController(TestService testService) {
+    public TestController(TestService testService, HttpTestService httpTestService) {
         this.testService = testService;
+        this.httpTestService = httpTestService;
     }
 
     @RequestMapping("/test")
     public DataResponse test() {
-        testService.testDb();
-        return DataResponse.create();
+        httpTestService.testGetRequest();
+        return DataResponse.create().put("whis", "whis");
     }
 
     @RequestMapping("/md5")
