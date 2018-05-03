@@ -4,8 +4,8 @@ version '1.0-SNAPSHOT'
 buildscript {
     ext {
         kotlinVersion = '1.2.31'
-        springBootVersion = '2.0.0.RELEASE'
-        springVersion = '5.0.4.RELEASE'
+        springBootVersion = '2.0.1.RELEASE'
+        springVersion = '5.0.5.RELEASE'
     }
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
@@ -60,14 +60,14 @@ dependencies {
     // base
     compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
     compile 'com.google.code.gson:gson:2.8.2'
-    compile 'com.google.guava:guava:23.5-jre'
+    compile 'com.google.guava:guava:24.0-jre'
     compile 'org.apache.commons:commons-lang3:3.7'
     compile group: 'org.apache.commons', name: 'commons-email', version: '1.5'
     compile group: 'commons-codec', name: 'commons-codec', version: '1.11'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
     compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
-    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
-    compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.1.8'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.5'
+    compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.1.10'
 
     // db
     compile 'mysql:mysql-connector-java:5.1.45'
