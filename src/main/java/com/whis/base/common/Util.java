@@ -4,22 +4,27 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
-import com.jayway.jsonpath.Configuration;
-import com.jayway.jsonpath.DocumentContext;
-import com.jayway.jsonpath.Option;
-import com.jayway.jsonpath.TypeRef;
+import com.jayway.jsonpath.*;
+import com.jayway.jsonpath.spi.json.GsonJsonProvider;
 import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
 import com.jayway.jsonpath.spi.json.JsonProvider;
 import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
 import com.jayway.jsonpath.spi.mapper.MappingProvider;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailConstants;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.slf4j.Logger;
+import org.springframework.core.ParameterizedTypeReference;
 
 import javax.annotation.Nullable;
 import java.io.PrintWriter;
@@ -38,7 +43,7 @@ public class Util {
     private static Logger logger = org.slf4j.LoggerFactory.getLogger(Util.class);
 
     public static void init() {
-        Configuration.setDefaults(new Configuration.Defaults() {
+        com.jayway.jsonpath.Configuration.setDefaults(new com.jayway.jsonpath.Configuration.Defaults() {
 
             private final JsonProvider jsonProvider = new JacksonJsonProvider();
             private final MappingProvider mappingProvider = new JacksonMappingProvider();
@@ -462,6 +467,20 @@ public class Util {
         return defaultValue;
     }
 
+    public static <T> T safeConvert(Object value, Class<T> type) {
+        return safeConvert(value, type, null);
+    }
+
+    public static <T> T safeConvert(Object value, Class<T> type, T defaultValue) {
+        if (value != null) {
+            try {
+                return (T) ConvertUtils.convert(value, type);
+            } catch (org.springframework.core.convert.ConversionException e) {
+                logger.error(getStackTrace(e, 9));
+            }
+        }
+        return defaultValue;
+    }
 
 
 

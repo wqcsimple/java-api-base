@@ -6,6 +6,7 @@ import com.whis.base.common.Util;
 import com.whis.base.core.Core;
 import com.whis.base.core.CoreQuery;
 import com.whis.base.exception.BaseException;
+import com.whis.base.redis.RedisKey;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -27,6 +28,13 @@ public abstract class BaseModel {
     private static Map<String, Method[]> keyMethodCache = new HashMap<>();
 
     public abstract Long ID();
+    public String cacheKey() {
+        return RedisKey.model(this.getClass(), ID());
+    }
+
+    public Integer cacheExpireTime() {
+        return 864000;
+    }
 
     private Map<String, Object> initialAttributes = new HashMap<>();
 
