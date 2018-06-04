@@ -56,7 +56,7 @@ repositories {
 }
 
 dependencies {
-
+    
     // base
     compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
     compile 'com.google.code.gson:gson:2.8.2'

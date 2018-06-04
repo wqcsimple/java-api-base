@@ -1,5 +1,6 @@
 package com.whis
 
+import com.documents4j.api.IConverter
 import com.whis.app.Application
 import com.whis.app.service.HttpTestService
 import com.whis.base.common.RequestUtil
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import java.io.File
 
 
 @SpringBootTest(classes = [(Application::class)])
@@ -22,8 +24,6 @@ class TestServiceTest {
 
     @Test
     fun test() {
-        httpTestService.testGetRequest()
-//        httpTestService.testPostRequest()
 
     }
 
