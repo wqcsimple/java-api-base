@@ -3,6 +3,11 @@
 
 
 
+## 20180608 
+
+> add pagination helper: val (offset, length) = Pagination.config(page) or Pagination.config(page, 20) 
+
+
 ## 生成uid方法
 
 ```java
